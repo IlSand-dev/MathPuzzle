@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Введен неправильный логин или пароль</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div class=login>
+    <div>
+		<h2>Вход в систему</h2>
+	</div>
+	<div>
+		<p style="text-align: right; width: 30%; margin: 5% 27% 0%">
+			<td>Логин:</td>
+  			<td>{{ form.username }}</td>
+		</p>
+		<p style="text-align: right; width: 30%; margin: 0% 27%">
+	   		<td>Пароль:</td>
+  			<td>{{ form.password }}</td>
+		</p>
+	</div>
+	<br>
+	<input type="submit" value="Вход">
+</div>
+</form>
+
+{% endblock %}
+
+   

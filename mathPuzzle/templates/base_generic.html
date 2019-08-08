@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>MathPuzzle</title> {% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    {% load static %}
+    {% block loadUnity %}{% endblock %}
+    <link rel="shortcut icon" href="{% static 'TemplateData/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'TemplateData/style.css' %}">
+
+</head>
+{% load static %}
+<body background="{% static 'TemplateData/background.jpg' %}" bgproperties="fixed">
+    {% block content %}{% endblock %}
+</body>
+</html>
