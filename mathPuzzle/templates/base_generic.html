@@ -11,7 +11,7 @@
 
 </head>
 {% load static %}
-<body background="{% static 'TemplateData/background.jpg' %}" bgproperties="fixed">
+{% block body %} {% endblock %}
     {% block content %}{% endblock %}
 </body>
 </html>

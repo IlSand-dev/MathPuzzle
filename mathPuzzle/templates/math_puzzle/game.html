@@ -1,4 +1,7 @@
 {% extends "base_generic.html" %}
+
+{% block body %}{% load static %}<body background="{% static 'TemplateData/game_background.png' %}">{% endblock %}
+
 {% block loadUnity %}
     {% block extrahead %}
     {% load static %}
@@ -11,6 +14,9 @@
 {% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
+    <div style="text-align:right">
+        <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
+    </div>
     <div class="webgl-content">
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
@@ -19,7 +25,5 @@
         <div class="title">MathPuzzle</div>
       </div>
     </div>
-    {% else %}
-
     {% endif %}
 {% endblock %}

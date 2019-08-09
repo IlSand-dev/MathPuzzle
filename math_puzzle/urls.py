@@ -22,6 +22,10 @@ urlpatterns = [
 ]
 
 urlpatterns += [
+    path(r'accounts/logout/', include('mathPuzzle.urls'))
+]
+
+urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 

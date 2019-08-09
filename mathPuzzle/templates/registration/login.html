@@ -1,10 +1,10 @@
 {% extends "base_generic.html" %}
 
+{% block body %}{% load static %}<body background="{% static 'TemplateData/background.jpeg' %}" bgproperties="fixed">{% endblock %}
+
 {% block content %}
 
-{% if form.errors %}
-<p>Введен неправильный логин или пароль</p>
-{% endif %}
+
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -34,6 +34,10 @@
 	</div>
 	<br>
 	<input type="submit" value="Вход">
+	<br>
+	{% if form.errors %}
+		<p font-color="#ff0000">Введен неправильный логин или пароль</p>
+	{% endif %}
 </div>
 </form>
 

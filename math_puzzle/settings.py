@@ -31,13 +31,13 @@ ALLOWED_HOSTS = ['127.0.0.1', 'mathPuzzle.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'mathPuzzle',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mathPuzzle'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +124,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDICT_URL = '/'
