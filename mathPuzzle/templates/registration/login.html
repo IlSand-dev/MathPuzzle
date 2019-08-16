@@ -1,10 +1,6 @@
 {% extends "base_generic.html" %}
 
-{% block body %}{% load static %}<body background="{% static 'TemplateData/background.jpeg' %}" bgproperties="fixed">{% endblock %}
-
 {% block content %}
-
-
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -40,7 +36,6 @@
 	{% endif %}
 </div>
 </form>
-
 {% endblock %}
 
    

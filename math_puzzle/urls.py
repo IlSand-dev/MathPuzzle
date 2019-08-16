@@ -32,3 +32,4 @@ urlpatterns += [
 urlpatterns += [
     path('', include('mathPuzzle.urls'))
 ]
+

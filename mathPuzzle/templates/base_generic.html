@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="{% static 'TemplateData/style.css' %}">
 
 </head>
-{% load static %}
-{% block body %} {% endblock %}
-    {% block content %}{% endblock %}
+{% block body %}<body background="{% static 'TemplateData/background.jpeg' %}" bgproperties="fixed">{% endblock %}
+{% block content %}{% endblock %}
 </body>
 </html>
