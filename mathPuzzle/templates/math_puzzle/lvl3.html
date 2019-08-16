@@ -1,18 +1,17 @@
 {% extends "base_generic.html" %}
 
-{% block body %}{% load static %}<body background="{% static 'TemplateData/game_background.png' %}">{% endblock %}
-
 {% block loadUnity %}
     {% block extrahead %}
     {% load static %}
     <script src="{% static 'TemplateData/UnityProgress.js' %}"></script>
-    <script src="{% static 'Build/UnityLoader.js' %}"></script>
+    <script src="{% static 'MathPuzzleLvl2/Build/UnityLoader.js' %}"></script>
     <script>
-       var unityInstance = UnityLoader.instantiate("unityContainer", "static/Build/MathPuzzle.json", {onProgress: UnityProgress});
+       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzleLvl2/Build/MathPuzzleLvl2.json' %}", {onProgress: UnityProgress});
     </script>
     {% endblock extrahead %}
 {% endblock %}
 {% block content %}
+{% load static %}<body background="{% static 'TemplateData/game_background.png' %}">
     {% if user.is_authenticated %}
     <div style="text-align:right">
         <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
@@ -26,4 +25,5 @@
       </div>
     </div>
     {% endif %}
+</body>>
 {% endblock %}

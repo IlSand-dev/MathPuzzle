@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% block loadUnity %}
+    {% block extrahead %}
+    {% load static %}
+    <script src="{% static 'TemplateData/UnityProgress.js' %}"></script>
+    <script src="{% static 'MathPuzzleLvl1/Build/UnityLoader.js' %}"></script>
+    <script>
+       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzleLvl1/Build/MathPuzzleLvl1.json' %}", {onProgress: UnityProgress});
+    </script>
+    {% endblock extrahead %}
+{% endblock %}
+{% block content %}
+{% load static %}<body background="{% static 'TemplateData/game_background.png' %}">
+    {% if user.is_authenticated %}
+    <div style="text-align:right">
+        <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
+    </div>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">MathPuzzle</div>
+      </div>
+    </div>
+    {% endif %}
+</body>
+{% endblock %}
