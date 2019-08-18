@@ -2,7 +2,13 @@
 
 
 {% block content %}
-    <div style="margin:30% 30%">
-        <a href="{% url 'lvl1' %}">Первый уровень</a>
+    <div style="margin:25% 30%;position: absolute; display:inline">
+        <a href="{% url 'lvl1' %}">Площади</a>
+    </div>
+    <div style="margin: 25% 50%;position:absolute; display:inline">
+        <a href="{% url 'lvl2' %}">Формулы(первый уровень)</a>
+    </div>
+    <div style="margin: 25% 70%;position:absolute; display:inline">
+        <a href="{% url 'lvl3' %}">Формулы(второй уровень)</a>
     </div>
 {% endblock %}

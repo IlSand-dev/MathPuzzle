@@ -17,8 +17,6 @@
 .webgl-content .footer .title {margin-right: 10px; float: right;}
 .webgl-content .footer .fullscreen {background-image: url('fullscreen.png'); width: 38px; float: right;}
 
-body {background-attachment: fixed;background-repeat: no-repeat; background-size:100% 100%;overflow:hidden}
-table {background-color:#fffff0; font-size:larger}
-tr.first {background-color:#d3d3d3}
+body {background-attachment: fixed;background-repeat: no-repeat; background-size:100% 100%;overflow:hidden; min-height:100%; min-width:100%;position:absolute}
 div.login{width: 62.8%;position:absolute;margin: 20.5% 18.7%;display:block;text-align:center;}
 
