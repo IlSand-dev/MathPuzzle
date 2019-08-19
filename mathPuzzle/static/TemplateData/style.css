@@ -19,4 +19,7 @@
 
 body {background-attachment: fixed;background-repeat: no-repeat; background-size:100% 100%;overflow:hidden; min-height:100%; min-width:100%;position:absolute}
 div.login{width: 62.8%;position:absolute;margin: 20.5% 18.7%;display:block;text-align:center;}
-
+div.exit{text-align:right;margin:0% 1%;}
+div.left{position:absolute; margin:4% 25%}
+div.menu{position:absolute; margin:4% 50%}
+div.right{position:absolute; margin:4% 70%}
