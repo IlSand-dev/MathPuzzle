@@ -1,26 +1,27 @@
 {% extends "base_generic.html" %}
+
 {% block loadUnity %}
     {% block extrahead %}
     {% load static %}
     <script src="{% static 'TemplateData/UnityProgress.js' %}"></script>
-    <script src="{% static 'MathPuzzleLvl1/Build/UnityLoader.js' %}"></script>
+    <script src="{% static 'MathPuzzleLvl3/Build/UnityLoader.js' %}"></script>
     <script>
-       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzleLvl1/Build/MathPuzzleLvl1.json' %}", {onProgress: UnityProgress});
+       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzleLvl3/Build/MathPuzzleLvl3.json' %}", {onProgress: UnityProgress});
     </script>
     {% endblock extrahead %}
 {% endblock %}
+
 {% block body %}{% load static %}<body background="{% static 'TemplateData/game_background.png' %}">{% endblock %}
+
 {% block content %}
 {% load static %}
     {% if user.is_authenticated %}
+
     <div class=menu>
         <a href="{% url 'menu' %}" class=blubtn>Меню</a>
     </div>
     <div class=left>
-        <a href="{% url 'lvl1' %}" class=bot8>Площади</a>
-    </div>
-    <div class=right>
-        <a href="{% url 'lvl3' %}" class=bot8>Степени</a>
+        <a href="{% url 'lvl3' %}" class=bot8>Формулы</a>
     </div>
     <div style="top:77.5%; width:100%;text-align:center; position:absolute;display:inline">
         <a href="{% url 'instruction' %}" class="blubtn" style="width:150px">Инструкция к лото</a>
