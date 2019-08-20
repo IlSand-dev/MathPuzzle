@@ -17,6 +17,17 @@ def menu(request):
             return redirect(settings.LOGIN_URL, request.path)
 
 
+def instruction(request):
+    if request.path == '/accounts/logout/':
+        logout(request)
+        return redirect(settings.LOGIN_URL, request.path)
+    else:
+        if request.user.is_authenticated:
+            return render(request, 'math_puzzle/instruction.html')
+        else:
+            return redirect(settings.LOGIN_URL, request.path)
+
+
 def game(request):
     if request.path == '/accounts/logout/':
         logout(request)

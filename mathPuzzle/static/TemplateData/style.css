@@ -17,9 +17,66 @@
 .webgl-content .footer .title {margin-right: 10px; float: right;}
 .webgl-content .footer .fullscreen {background-image: url('fullscreen.png'); width: 38px; float: right;}
 
+a.blubtn {
+  width:90px;
+  height:20px;
+  text-align:center;
+  display:block;
+  font-family: arial;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 14px;
+  border: #1071FF 1px solid;
+  color: #1071FF;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+   margin: 20px auto;
+  transition: .5s;
+  border-radius: 0px;
+}
+a.blubtn:hover {
+  top: 5px;
+  transition: .5s;
+  color: #10FF58;
+  border: #10FF58 1px solid;
+  border-radius: 10px;
+}
+a.blubtn:active {
+  color: #000;
+  border: #1A1A1A 1px solid;
+  transition: .07s;
+  background-color: #FFF;
+}
+
+a.bot8 {
+  background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+        border-radius: 4px;
+    color: #555555;
+    display:block;
+        width:120px;
+        margin: 20px auto;
+    font-size: 14px;
+        text-align:center;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    vertical-align: middle;
+        text-decoration:none;
+}
+a.bot8:hover, a.bot8:focus {
+   border-color: rgba(82, 168, 236, 0.8);
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+   outline: 0 none;
+}
+
 body {background-attachment: fixed;background-repeat: no-repeat; background-size:100% 100%;overflow:hidden; min-height:100%; min-width:100%;position:absolute}
 div.login{width: 62.8%;position:absolute;margin: 20.5% 18.7%;display:block;text-align:center;}
 div.exit{text-align:right;margin:0% 1%;}
-div.left{position:absolute; margin:4% 25%}
-div.menu{position:absolute; margin:4% 50%}
-div.right{position:absolute; margin:4% 70%}
+div.left{position:absolute; left:25%;top:10%}
+div.menu{position:absolute; text-align:center; width:100%;top:10%}
+div.right{position:absolute; right:25%;top:10%}

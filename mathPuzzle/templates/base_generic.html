@@ -11,6 +11,11 @@
 
 </head>
 {% block body %}<body background="{% static 'TemplateData/background.jpeg' %}" bgproperties="fixed">{% endblock %}
+{% if user.is_authenticated %}
+    <div class=exit>
+        <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
+    </div>
+{% endif %}
 {% block content %}{% endblock %}
 </body>
 </html>

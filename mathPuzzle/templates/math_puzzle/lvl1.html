@@ -14,14 +14,12 @@
     {% endblock extrahead %}
 {% endblock %}
 {% block content %}
-    <div class=exit>
-        <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
-    </div>
+
     <div class=menu>
-        <a href="{% url 'menu' %}">&lt;&lt;&lt;Меню>>></a>
+        <a href="{% url 'menu' %}" class=blubtn>Меню</a>
     </div>
     <div class=right>
-        <a href="{% url 'lvl2' %}">Формулы(первый уровень)>>></a>
+        <a href="{% url 'lvl2' %}" class=bot8>Формулы</a>
     </div>
     <div class="webgl-content">
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
