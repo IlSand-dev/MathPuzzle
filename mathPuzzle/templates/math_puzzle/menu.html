@@ -14,7 +14,11 @@
     <div style="top:50%;right:25%;position:absolute; display:inline">
         <a href="{% url 'lvl4' %}" class=bot8 style="width:150px">Лото: "Тригонометрия"</a>
     </div>
-    <div style="top:60%; width:100%;text-align:center; position:absolute;display:inline">
+    <div style="top:60%; right: 39%;position:absolute;display:inline">
         <a href="{% url 'instruction' %}" class="blubtn" style="width:150px">Инструкция к лото</a>
+    </div>
+    {% load static %}
+    <div style="top:60%; left: 25%; position:absolute; display:inline">
+        <a target="_blank" href="{% static 'docs/geometry-instruction.pdf' %}" class="blubtn" style="width:150px">Справка по геометрии</a>
     </div>
 {% endblock %}
