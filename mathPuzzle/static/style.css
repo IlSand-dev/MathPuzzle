@@ -21,4 +21,6 @@ body {background-attachment:fixed; background-repeat: no-repeat;overflow:hidden}
 table {background-color:#fffff0; font-size:larger}
 tr.first {background-color:#d3d3d3}
 div.login{width: 62.8%;position:absolute;margin: 30% 18.7%;display:block;text-align:center;}
-
+div.left{position:absolute; margin:4% 25%}
+div.menu{position:absolute; margin:4% 50%}
+div.right{position:absolute; margin:4% 70%}

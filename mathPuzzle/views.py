@@ -2,9 +2,7 @@ from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import io
-from django.http import FileResponse, HttpResponse
-from reportlab.pdfgen import canvas
+
 
 
 # Create your views here.
