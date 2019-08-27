@@ -9,7 +9,7 @@
     <script src="{% static 'TemplateData/UnityProgress.js' %}"></script>
     <script src="{% static 'MathPuzzle/Build/UnityLoader.js' %}"></script>
     <script>
-       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzle/Build/MathPuzzle.json' %}", {onProgress: UnityProgress});
+       var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'MathPuzzle/Build/Builds.json' %}", {onProgress: UnityProgress});
     </script>
     {% endblock extrahead %}
 {% endblock %}
