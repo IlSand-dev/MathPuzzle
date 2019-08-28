@@ -1,6 +1,4 @@
-from django.conf.urls import url
 from django.urls import path
-from patterns import patterns
 
 from mathPuzzle import views
 from mathPuzzle.views import TestView
