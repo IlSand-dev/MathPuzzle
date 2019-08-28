@@ -1,6 +1,16 @@
 from django.contrib import admin
 
 # Register your models here
-from .models import Question
+from .models import Question, Answer
 
-admin.site.register(Question)
+
+class AnswerInline(admin.TabularInline):
+    model = Answer
+    extra = 3
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = [AnswerInline]
+
+
+admin.site.register(Question, QuestionAdmin)

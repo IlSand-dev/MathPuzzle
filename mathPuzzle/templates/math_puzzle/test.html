@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    {% load static %}
+    {% if user.is_authenticated %}
+        {% if questions_list %}
+            <ul>
+                {% for question in questions_list %}
+                    <li>
+                        <a href="/questions/{{ question.id }}/">{{ question.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Тесты не найдены.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
