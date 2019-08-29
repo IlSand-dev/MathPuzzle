@@ -18,6 +18,9 @@
     <div class=menu>
         <a href="{% url 'menu' %}" class=blubtn>Меню</a>
     </div>
+    <div style="top:77%; width:100%; text-align:center;position:absolute; display:inline">
+        <a target="_blank" href="{% static 'docs/geometry-instruction.pdf' %}" class="blubtn" style="width:150px">Справка по геометрии</a>
+    </div>
     <div class=right>
         <a href="{% url 'lvl2' %}" class=bot8>Формулы</a>
     </div>
@@ -25,8 +28,5 @@
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
       </div>
-    </div>
-    <div style="top:77%; width:100%; text-align:center;position:absolute; display:inline">
-        <a target="_blank" href="{% static 'docs/geometry-instruction.pdf' %}" class="blubtn" style="width:150px">Справка по геометрии</a>
     </div>
 {% endblock %}

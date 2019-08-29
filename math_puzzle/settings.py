@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xwc=nh4@kdu7nmdjpz6)iw3j*b#g$%h1@$5=q4wz!=by0nn9=='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'puzzlemath.pythonanywhere.com']
 

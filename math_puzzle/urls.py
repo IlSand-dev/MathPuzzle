@@ -24,13 +24,11 @@ urlpatterns = [
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
-                   path(r'accounts/logout/', include('mathPuzzle.urls'))
+                   url(r'^', include('mathPuzzle.urls'))
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
                    url(r'^accounts/', include('django.contrib.auth.urls')),
                ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += [
-                   path('', include('mathPuzzle.urls'))
-               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
