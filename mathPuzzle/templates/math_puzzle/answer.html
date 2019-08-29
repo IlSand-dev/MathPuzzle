@@ -4,18 +4,23 @@
     {% if user.is_authenticated %}
         <div style="width:100%; top:40%;position:absolute; text-align:center">
             <h1>{{question.title}}</h1>
-            <form action="/question/{{ question.id }}/answer/" method="post">
+            <form action="/task/{{ task.id }}/question/{{ question.number }}/" method="post">
                 {% csrf_token %}
                 <div style="text-align:left;font-size:large;display: inline-block;">
                 {% for answer in question.answer_set.all %}
-                    <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+                    {% if question.type == 'single_answer' %}
+                        <input type="radio" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+                    {% else %}
+                        <input type="checkbox" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+                    {% endif %}
                     <label for="answer{{ forloop.counter }}">{{ answer.text }}</label><br />
                 {% endfor %}
                 </div>
                 <br>
                 <br>
                 <br>
-                <input class="blubtn" type="submit" value="Ответить" />
+                <input id="task_result_id" type="hidden" name="task_result_id" value="{{ task_result_id }}">
+                <input type="submit" value="Ответить" />
             </form>
         </div>
         <div style="top:65%;position:absolute;width:100%; text-align:center">

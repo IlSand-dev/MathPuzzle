@@ -3,11 +3,11 @@
     {% load static %}
     {% if user.is_authenticated %}
         {% if tasks_list %}
-            <div style="width:100%; top:40%; text-align:center; position:absolute">
+            <div style="left:35%; top:40%; position:absolute">
                 <ul>
                     {% for task in tasks_list %}
                         <li>
-                            <a href="/question/{{ task.id }}/">{{ task.title }}</a>
+                            <a href="/task/{{ task.id }}/question/1" class="bot8">{{ task.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -15,5 +15,8 @@
         {% else %}
             <p>Тесты не найдены.</p>
         {% endif %}
+            <div style="top:45%; right:35%; position:absolute;display:inline">
+                <a href="{% url 'menu' %}" class="blubtn" style="width:150px">Меню</a>
+            </div>
     {% endif %}
 {% endblock %}

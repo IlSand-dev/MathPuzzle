@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+    <div style="top:48%;width:100%;text-align:center;position:absolute; display:inline">
+        <a href="{% url 'lvl3' %}" class=bot8 style="width:150px">Лото: "Степени"</a>
+    </div>
+    <div style="top:48%; left: 25%;position:absolute; display:inline">
+        <a href="{% url 'lvl2' %}" class=bot8 style="width:150px">Лото: "Формулы"</a>
+    </div>
+    <div style="top:48%;right:25%;position:absolute; display:inline">
+        <a href="{% url 'lvl4' %}" class=bot8 style="width:150px">Лото: "Тригонометрия"</a>
+    </div>
+
+    <div style="top:55%; width:100%; text-align:center ;position:absolute;display:inline">
+        <a href="{% url 'instruction' %}" class="blubtn" style="width:150px">Инструкция к лото</a>
+    </div>
+    <div style="top:62%; width:100%; text-align:center;position:absolute;display:inline">
+        <a href="{% url 'menu' %}" class="blubtn" style="width:150px">Меню</a>
+    </div>
+{% endblock %}

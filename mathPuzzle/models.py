@@ -30,13 +30,22 @@ class TaskResult(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date_time = models.DateTimeField(verbose_name="Время ответа", default=timezone.now())
+    result = models.IntegerField(verbose_name="Резултат", default=0)
+    question_number = models.IntegerField(verbose_name="Номер последнего вопроса", default=0)
 
 
 class Question(models.Model):
-    task_id = models.ForeignKey(Task, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
     number = models.IntegerField(verbose_name="Номер вопроса", default=1)
     title = models.CharField(max_length=200, verbose_name="Вопрос", default="question")
     date_published = models.DateTimeField(verbose_name="Дата публикации", default=timezone.now())
+    SINGLE_ANSWER = 'single_answer'
+    MULTIPLY_ANSWER = 'multiply_answer'
+    type_choices = (
+        (SINGLE_ANSWER, 'single_answer'),
+        (MULTIPLY_ANSWER, 'multiply_answer'),
+    )
+    type = models.CharField(max_length=200, verbose_name="Тип", choices=type_choices, default=SINGLE_ANSWER)
 
     def __str__(self):
         return self.title

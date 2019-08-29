@@ -2,17 +2,14 @@
 
 
 {% block content %}
+    <div style="top:45%;width:100%;text-align:center;position:absolute;display:inline">
+        <a href="{% url 'loto_menu' %}" class="bot8" style="width:150px">Лото</a>
+    </div>
     <div style="top:45%;left: 25%;position: absolute; display:inline">
         <a href="{% url 'lvl1' %}" class=bot8 style="width:150px">Площади</a>
     </div>
-    <div style="top:45%; left: 39%;position:absolute; display:inline">
-        <a href="{% url 'lvl2' %}" class=bot8 style="width:150px">Лото: "Формулы"</a>
-    </div>
-    <div style="top:45%;right:39%;position:absolute; display:inline">
-        <a href="{% url 'lvl3' %}" class=bot8 style="width:150px">Лото: "Степени"</a>
-    </div>
-    <div style="top:45%;right:25%;position:absolute; display:inline">
-        <a href="{% url 'lvl4' %}" class=bot8 style="width:150px">Лото: "Тригонометрия"</a>
+    <div style="top:45%;right: 25%;position: absolute; display:inline">
+        <a href="{% url 'task' %}" class=bot8 style="width:150px">Тесты</a>
     </div>
     <div style="top:55%; width:100%; text-align:center ;position:absolute;display:inline">
         <a href="{% url 'instruction' %}" class="blubtn" style="width:150px">Инструкция к лото</a>
@@ -26,4 +23,5 @@
     </div>
     <div style="top:65%; width:100%; text-align:center;position:absolute;display:inline">
         <a target="_blank" href="{% static 'docs/function-theory.pdf' %}" class="blubtn" style="width:225px">Графики функций с решениями</a>
+    </div>
 {% endblock %}
