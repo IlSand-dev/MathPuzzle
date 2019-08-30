@@ -66,7 +66,7 @@ def show_question(request, task_id, question_number):
                         task_result.save()
             question_number += 1
             if question_number > task.question_set.latest('number').number:
-                return redirect(f"/result/{task_result_id}")
+                return redirect("/result/" + task_result_id)
             task_result.question_number += 1
             task_result.save()
             question = task.question_set.get(number=question_number)
