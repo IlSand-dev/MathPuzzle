@@ -7,14 +7,16 @@
             <form action="/task/{{ task.id }}/question/{{ question.number }}/" method="post">
                 {% csrf_token %}
                 <div style="text-align:left;font-size:large;display: inline-block;">
+                <tr name="answer">
                 {% for answer in question.answer_set.all %}
                     {% if question.type == 'single_answer' %}
-                        <input type="radio" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+                        <td><input type="radio" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
                     {% else %}
-                        <input type="checkbox" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+                        <td><input type="checkbox" name="answer_id" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
                     {% endif %}
                     <label for="answer{{ forloop.counter }}">{{ answer.text }}</label><br />
                 {% endfor %}
+                </td>
                 </div>
                 <br>
                 <br>

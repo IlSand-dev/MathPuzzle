@@ -51,15 +51,19 @@ def show_question(request, task_id, question_number):
         task_result = get_object_or_404(TaskResult, id=task_result_id)
 
         if question_number == task_result.question_number:
-            reqAnswer = request.POST.get('answer_id')
-            print('reqAnswer:', reqAnswer)
-            if reqAnswer:
-                reqAnswer = int(reqAnswer)
-                answer = question.answer_set.get(pk=reqAnswer)
-                if answer.is_right:
-                    task_result.result += 1
-                    task_result.save()
+            if question.type == 'multiply_answer' or question.type == 'single_answer':
+                req_answer = request.POST.getlist('answer_id')
 
+                if req_answer:
+                    right = True
+                    for i in req_answer:
+                        answer = question.answer_set.get(pk=i)
+                        if not answer.is_right:
+                            right = False
+                            break
+                    if right:
+                        task_result.result += 1
+                        task_result.save()
             question_number += 1
             if question_number > task.question_set.latest('number').number:
                 return redirect(f"/result/{task_result_id}")

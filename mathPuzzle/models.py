@@ -46,6 +46,7 @@ class Question(models.Model):
         (MULTIPLY_ANSWER, 'multiply_answer'),
     )
     type = models.CharField(max_length=200, verbose_name="Тип", choices=type_choices, default=SINGLE_ANSWER)
+    right_answers = models.IntegerField(verbose_name="Кол-во правильных ответов", default=1)
 
     def __str__(self):
         return self.title
