@@ -49,18 +49,18 @@ def show_question(request, task_id, question_number):
     task_result_id = request.POST.get('task_result_id')
     if task_result_id:
         task_result = get_object_or_404(TaskResult, id=task_result_id)
-
         if question_number == task_result.question_number:
             if question.type == 'multiply_answer' or question.type == 'single_answer':
-                req_answer = request.POST.getlist('answer_id')
-
+                req_answer = set(map(int, request.POST.getlist('answer_id')))
                 if req_answer:
-                    right = True
-                    for i in req_answer:
-                        answer = question.answer_set.get(pk=i)
-                        if not answer.is_right:
-                            right = False
-                            break
+                    right_answers = set([answer.id for answer in question.answer_set.filter(is_right=True)])
+                    right = req_answer == right_answers
+                    # right = True
+                    # for i in req_answer:
+                    #     answer = question.answer_set.get(pk=i)
+                    #     if not answer.is_right:
+                    #         right = False
+                    #         break
                     if right:
                         task_result.result += 1
                         task_result.save()
@@ -88,51 +88,4 @@ def result(request, task_result_id):
     return render(request, 'math_puzzle/results.html',
                   {'task_result': get_object_or_404(TaskResult, pk=task_result_id)})
 
-# def detail(request, task_id, question_number):
-#     task = get_object_or_404(Task, pk=task_id)
-#     question_number = int(question_number) + 1
-#     task_result_id = request.POST.get('task_result_id')
-#     print('detail() task_result_id: ', task_result_id)
-#     if task_result_id is None:
-#         task_result = TaskResult(user_id=request.user, task_id=task)
-#         task_result.save()
-#         task_result_id = task_result.id
-#         return render(request, "math_puzzle/answer.html",
-#                       {"question": task.question_set.get(number=question_number),
-#                        "task": task,
-#                        "task_result_id": task_result_id})
-#     else:
-#         task_result = get_object_or_404(TaskResult, id=task_result_id)
-#     print('task_result.result:', task_result.result)
-#     if question_number > task.question_set.latest('number').number:
-#         print(task_result.result)
-#         return redirect("/task/")
-#     question = task.question_set.get(number=question_number)
-#     answer = question.answer_set.get(pk=request.POST['answer'])
-#     if answer.is_right:
-#         task_result.result += 1
-#         task_result.save()
-#     return render(request, "math_puzzle/answer.html",
-#                   {"question": question,
-#                    "task": task,
-#                    "task_result_id": task_result_id})
 
-# def answer(request, task_id, question_number):
-#     task = get_object_or_404(Task, pk=task_id)
-#     question = task.question_set.get(number=question_number)
-#     task_result_id = request.POST.get('task_result_id')
-#     print('answer() task_result_id: ', task_result_id)
-#     task_result = get_object_or_404(TaskResult, pk=task_result_id)
-#     try:
-#         answer = question.answer_set.get(pk=request.POST['answer'])
-#     except (KeyError, Answer.DoesNotExist):
-#         return render(request, 'math_puzzle/answer.html',
-#                       {'question': question, 'error_message': 'Answer does not exist'})
-#     if answer.is_right:
-#         task_result.result += 1
-#         task_result.save()
-#     if int(question_number) != task.question_set.latest('number').number:
-#         return redirect(f'/task/{task_id}/question/{question_number}/')
-#     else:
-#         print(task_result.result)
-#         return redirect("/task/")
