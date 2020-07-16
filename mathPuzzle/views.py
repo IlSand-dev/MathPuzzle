@@ -1,9 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import logout_then_login
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
+from django.views.generic import FormView
 
+from .forms import CreateUserForm
 from .models import Question, Answer, Task, TaskResult
 
 
@@ -89,3 +92,14 @@ def result(request, task_result_id):
                   {'task_result': get_object_or_404(TaskResult, pk=task_result_id)})
 
 
+class CreateUserFormView(FormView):
+    form_class = CreateUserForm
+    success_url = '/'
+    template_name = "registration/register.html"
+
+    def form_valid(self, form):
+        form.save()
+        return super(CreateUserFormView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(CreateUserFormView, self).form_invalid(form)

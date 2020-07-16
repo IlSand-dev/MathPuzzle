@@ -7,10 +7,10 @@
 
 <div class=login>
     <div>
-		<h2>Вход в систему</h2>
+		<h2>Вход</h2>
 	</div>
 	<div>
-		<p style="text-align: right; width: 30%; margin: 5% 27% 0%">
+		<p style="text-align: right; width: 30%; margin: 0% 27% 0%">
 			<td>Логин:</td>
   			<td>{{ form.username }}</td>
 		</p>
@@ -22,6 +22,7 @@
 	<br>
 	<input type="submit" value="Вход">
 	<br>
+	<a href="{% url 'register' %}">Регистрация</a>
 	{% if form.errors %}
 		<p font-color="#ff0000">Введен неправильный логин или пароль</p>
 	{% endif %}
