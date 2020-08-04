@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.generic import FormView
 
 from .forms import CreateUserForm
-from .models import Question, Answer, Task, TaskResult
+from .models import Question, Answer, Task, TaskResult, Role
 
 
 # Create your views here.
@@ -92,13 +92,25 @@ def result(request, task_result_id):
                   {'task_result': get_object_or_404(TaskResult, pk=task_result_id)})
 
 
+def profile(request):
+    user_role = request.user.role.role
+    if str(user_role) == request.user.role.GUEST:
+        return render(request, 'registration/profiles/guest_profile.html')
+    elif str(user_role) == request.user.role.STUDENT:
+        return render(request, 'registration/profiles/student_profile.html')
+    elif str(user_role) == request.user.role.TEACHER:
+        return render(request, 'registration/profiles/teacher_profile.html')
+
+
 class CreateUserFormView(FormView):
     form_class = CreateUserForm
     success_url = '/'
     template_name = "registration/register.html"
 
     def form_valid(self, form):
-        form.save()
+        user = form.save()
+        user.role = Role()
+        user.role.save()
         return super(CreateUserFormView, self).form_valid(form)
 
     def form_invalid(self, form):

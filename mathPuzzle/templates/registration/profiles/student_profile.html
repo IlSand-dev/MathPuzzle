@@ -1,0 +1,5 @@
+{% extends "registration/profile.html" %}
+{% block role_content %}
+    <p>Школа: {{ user.role.school_class.all.0.school }}</p>
+    <p>Класс: {{ user.role.school_class.all.0 }}</p>
+{% endblock %}

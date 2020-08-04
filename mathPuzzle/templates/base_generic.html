@@ -13,7 +13,7 @@
 {% block body %}<body background="{% static 'TemplateData/background.png' %}" bgproperties="fixed">{% endblock %}
 {% if user.is_authenticated %}
     <div class=exit>
-        <a href="">{{user.get_full_name}}</a><a href="{% url 'logout' %}">(выйти)</a>
+        <a href="{% url 'profile' %}">{% if user.get_full_name != "" %} {{user.get_full_name}} {% else %} Профиль {% endif %}</a><a href="{% url 'logout' %}">(выйти)</a>
     </div>
 {% endif %}
 {% block content %}{% endblock %}

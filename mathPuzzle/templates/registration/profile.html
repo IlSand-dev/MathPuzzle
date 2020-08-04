@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div style="top:38%;width:100%;text-align:center;position:absolute">
+    <h3>{% if user.get_full_name == "" %}{{ user.get_username }}{% endif %}{{user.get_full_name}}</h3>
+    {% block role_content %}{% endblock %}
+    <a class="blubtn" href="{% url 'menu' %}" style="width:200px">Перейти к упражнениям</a>
+</div>
+{% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^instruction', views.instruction, name='instruction'),
     url(r'accounts/logout/', views.logout, name='logout'),
     url(r'accounts/register/', views.CreateUserFormView.as_view(), name='register'),
+    url(r'accounts/profile/', views.profile, name='profile'),
     url(r'loto_menu/$', views.loto_menu, name="loto_menu"),
     url(r'^task/$', views.test, name='task'),
     url(r'^task/(?P<task_id>\d+)/question/(?P<question_number>\d+)/$', views.show_question, name='show_question'),

@@ -1,0 +1,6 @@
+{% extends "registration/profile.html" %}
+{% block role_content %}
+    <p>Школа: {{ user.role.school_class.all.0.school }}</p>
+    <p>Классы: {% for class in user.role.school_class.all %}{{ class }}{% if not forloop.last %}, {% endif %}  {% endfor %}</p>
+    <a class="blubtn" href="" style="width:200px">Управление классами</a>
+{% endblock %}

@@ -1,4 +1,5 @@
 import datetime
+from enum import Enum
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -69,3 +70,45 @@ class Answer(models.Model):
         verbose_name_plural = 'Ответы'
 
 
+class School(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Название школы")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Школа'
+        verbose_name_plural = 'Школы'
+
+
+class SchoolClass(models.Model):
+    name = models.CharField(max_length=3, verbose_name='Номер и буква класса')
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Класс'
+        verbose_name_plural = 'Классы'
+
+
+class Role(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, )
+    GUEST = "GUEST"
+    STUDENT = "STUDENT"
+    TEACHER = "TEACHER"
+    roles = (
+        (GUEST, 'Гость'),
+        (TEACHER, 'Учитель'),
+        (STUDENT, 'Ученик'),
+    )
+    role = models.CharField(max_length=200, verbose_name="Роль", choices=roles, default=GUEST)
+    # school_class = models.ForeignKey(SchoolClass, on_delete=models.CASCADE)
+    school_class = models.ManyToManyField(SchoolClass)
+
+    def __unicode__(self):
+        return self.user
+
+    def __str__(self):
+        return self.role
