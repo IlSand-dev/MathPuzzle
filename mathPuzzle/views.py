@@ -39,6 +39,11 @@ def game(request):
 
 
 @login_required
+def crossword(request):
+    return render(request, 'math_puzzle/crossword.html')
+
+
+@login_required
 def test(request):
     return render(request, "math_puzzle/question.html", {"tasks_list": Task.objects.order_by('id')[:5]})
 
@@ -58,15 +63,15 @@ def show_question(request, task_id, question_number):
                 if req_answer:
                     right_answers = set([answer.id for answer in question.answer_set.filter(is_right=True)])
                     right = req_answer == right_answers
-                    # right = True
-                    # for i in req_answer:
-                    #     answer = question.answer_set.get(pk=i)
-                    #     if not answer.is_right:
-                    #         right = False
-                    #         break
                     if right:
                         task_result.result += 1
                         task_result.save()
+            elif question.type == 'open_answer':
+                answer = request.POST.get('answer').lower()
+                right_answer = list(question.answer_set.filter(is_right=True))[0].text.lower()
+                if answer == right_answer:
+                    task_result.result += 1
+                    task_result.save()
             question_number += 1
             if question_number > task.question_set.latest('number').number:
                 return redirect("/result/" + task_result_id)

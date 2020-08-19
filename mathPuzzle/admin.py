@@ -7,7 +7,7 @@ from .models import Question, Answer, Task, Role, School, SchoolClass
 
 class AnswerInline(admin.TabularInline):
     model = Answer
-    extra = 3
+    extra = 1
 
 
 class RoleInline(admin.StackedInline):

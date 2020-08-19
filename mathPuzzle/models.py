@@ -40,11 +40,14 @@ class Question(models.Model):
     number = models.IntegerField(verbose_name="Номер вопроса", default=1)
     title = models.CharField(max_length=200, verbose_name="Вопрос", default="question")
     date_published = models.DateTimeField(verbose_name="Дата публикации", default=timezone.now())
+    image = models.ImageField(blank=True, upload_to='images/questions', verbose_name='ссылка картинки')
     SINGLE_ANSWER = 'single_answer'
     MULTIPLY_ANSWER = 'multiply_answer'
+    OPEN_ANSWER = 'open_answer'
     type_choices = (
         (SINGLE_ANSWER, 'single_answer'),
         (MULTIPLY_ANSWER, 'multiply_answer'),
+        (OPEN_ANSWER, 'open_answer')
     )
     type = models.CharField(max_length=200, verbose_name="Тип", choices=type_choices, default=SINGLE_ANSWER)
     right_answers = models.IntegerField(verbose_name="Кол-во правильных ответов", default=1)

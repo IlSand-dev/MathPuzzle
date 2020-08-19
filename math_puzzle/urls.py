@@ -25,7 +25,7 @@ urlpatterns = [
 
 urlpatterns += [
                    url(r'^', include('mathPuzzle.urls'))
-               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
                    url(r'^accounts/', include('django.contrib.auth.urls')),
