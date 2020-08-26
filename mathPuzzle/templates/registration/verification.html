@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block javascript %}{% load static %} <script src="{% static 'scripts/verification.js' %}"></script> {% endblock %}
+{% block content %}
+<form action="{% url 'verification' %}" method="post">
+    {% csrf_token %}
+    <div class="login">
+        <p>Имя: {{ form.first_name }}</p>
+        <p>Фамилия: {{ form.last_name }}</p>
+        <p>Школа: {{ form.school }}</p>
+        <p>Класс: {{ form.school_class }}</p>
+        <input type="submit" value="Подтвердить">
+    </div>
+</form>
+{% endblock %}

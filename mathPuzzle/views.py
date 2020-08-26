@@ -1,13 +1,15 @@
-from django.conf import settings
+import json
+
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import logout_then_login
+from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.views.generic import FormView
 
-from .forms import CreateUserForm
-from .models import Question, Answer, Task, TaskResult, Role
+from .decorators import should_be_active
+from .forms import CreateUserForm, VerificationForm
+from .models import Task, TaskResult, Role, SchoolClass
 
 
 # Create your views here.
@@ -19,36 +21,43 @@ def logout(request):
 
 
 @login_required
+@should_be_active
 def menu(request):
     return render(request, 'math_puzzle/menu.html')
 
 
 @login_required
+@should_be_active
 def loto_menu(request):
     return render(request, "math_puzzle/loto_menu.html")
 
 
 @login_required
+@should_be_active
 def instruction(request):
     return render(request, 'math_puzzle/instruction.html')
 
 
 @login_required
+@should_be_active
 def game(request):
     return render(request, 'math_puzzle' + request.path[0:-1] + '.html')
 
 
 @login_required
+@should_be_active
 def crossword(request):
     return render(request, 'math_puzzle/crossword.html')
 
 
 @login_required
+@should_be_active
 def test(request):
     return render(request, "math_puzzle/question.html", {"tasks_list": Task.objects.order_by('id')[:5]})
 
 
 @login_required
+@should_be_active
 def show_question(request, task_id, question_number):
     task = get_object_or_404(Task, pk=task_id)
     question_number = int(question_number)
@@ -97,6 +106,8 @@ def result(request, task_result_id):
                   {'task_result': get_object_or_404(TaskResult, pk=task_result_id)})
 
 
+@login_required
+@should_be_active
 def profile(request):
     user_role = request.user.role.role
     if str(user_role) == request.user.role.GUEST:
@@ -120,3 +131,33 @@ class CreateUserFormView(FormView):
 
     def form_invalid(self, form):
         return super(CreateUserFormView, self).form_invalid(form)
+
+
+class VerificationFormView(FormView):
+    form_class = VerificationForm
+    success_url = 'accounts/profile/'
+    template_name = 'registration/verification.html'
+
+    def form_valid(self, form):
+        verification_data = form.cleaned_data
+        current_user = self.request.user
+        current_user.first_name = verification_data['first_name']
+        current_user.last_name = verification_data['last_name']
+        school_class = [get_object_or_404(SchoolClass, id=verification_data['school_class'])]
+        current_user.role.school_class.set(school_class)
+        current_user.role.role = current_user.role.STUDENT
+        current_user.save()
+        current_user.role.save()
+        return super(VerificationFormView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(VerificationFormView, self).form_invalid(form)
+
+
+def get_school_classes(request, school_id):
+    response = {'answer': []}
+    for school_class in SchoolClass.objects.values():
+        if school_class['school_id'] == int(school_id):
+            response['answer'].append([school_class['id'], school_class['name']])
+    new_response = json.dumps(response)
+    return HttpResponse(new_response, content_type='application/json')

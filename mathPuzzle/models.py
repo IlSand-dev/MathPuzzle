@@ -1,5 +1,4 @@
 import datetime
-from enum import Enum
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -98,6 +97,7 @@ class SchoolClass(models.Model):
 
 class Role(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, )
+    is_active = models.BooleanField(default=False)
     GUEST = "GUEST"
     STUDENT = "STUDENT"
     TEACHER = "TEACHER"
