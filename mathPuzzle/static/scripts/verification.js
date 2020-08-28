@@ -1,6 +1,6 @@
 "use strict"
 async function getSchoolClasses(school_id){
-	let response = await fetch(`http://127.0.0.1:8000/api/school_classes/${school_id}`);
+	let response = await fetch(`http://${window.location.host}/api/school_classes/${school_id}`);
 	let json
 	if (response.ok){
 		json =  await response.json();
