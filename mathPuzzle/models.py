@@ -96,6 +96,7 @@ class SchoolClass(models.Model):
 
 
 class Role(models.Model):
+    activate_token = models.CharField(max_length=30, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, )
     is_active = models.BooleanField(default=False)
     GUEST = "GUEST"

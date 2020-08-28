@@ -1,12 +1,17 @@
 import json
+import random
+import string
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.auth.views import logout_then_login
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.views.generic import FormView
 
+from math_puzzle import settings
 from .decorators import should_be_active
 from .forms import CreateUserForm, VerificationForm
 from .models import Task, TaskResult, Role, SchoolClass
@@ -21,43 +26,43 @@ def logout(request):
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def menu(request):
     return render(request, 'math_puzzle/menu.html')
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def loto_menu(request):
     return render(request, "math_puzzle/loto_menu.html")
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def instruction(request):
     return render(request, 'math_puzzle/instruction.html')
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def game(request):
     return render(request, 'math_puzzle' + request.path[0:-1] + '.html')
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def crossword(request):
     return render(request, 'math_puzzle/crossword.html')
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def test(request):
     return render(request, "math_puzzle/question.html", {"tasks_list": Task.objects.order_by('id')[:5]})
 
 
 @login_required
-@should_be_active
+# @should_be_active
 def show_question(request, task_id, question_number):
     task = get_object_or_404(Task, pk=task_id)
     question_number = int(question_number)
@@ -120,13 +125,14 @@ def profile(request):
 
 class CreateUserFormView(FormView):
     form_class = CreateUserForm
-    success_url = '/'
+    success_url = '/accounts/send_email'
     template_name = "registration/register.html"
 
     def form_valid(self, form):
         user = form.save()
         user.role = Role()
         user.role.save()
+        self.success_url = '/accounts/' + str(user.id) + '/activate_token'
         return super(CreateUserFormView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -161,3 +167,25 @@ def get_school_classes(request, school_id):
             response['answer'].append([school_class['id'], school_class['name']])
     new_response = json.dumps(response)
     return HttpResponse(new_response, content_type='application/json')
+
+
+def send_activate_email(request, user_id):
+    activate_token = ''.join(random.choices(string.ascii_uppercase + string.digits, k=30))
+    user = User.objects.get(id=user_id)
+    user.role.activate_token = activate_token
+    user.role.save()
+    send_mail('Подтверждение email',
+              'Для подтверждения почты перейдите по ссылке ' + request.build_absolute_uri(
+                  '/accounts/activate/') + '?activate_token=' + activate_token,
+              settings.EMAIL_HOST_USER,
+              [user.email])
+    return render(request, 'registration/email_verification.html')
+
+
+def check_token(request):
+    activate_token = request.GET.get("activate_token", "")
+    users = list(User.objects.filter(role__activate_token=activate_token))
+    for user in users:
+        user.role.is_active = True
+        user.role.save()
+    return redirect('/')
